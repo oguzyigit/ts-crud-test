@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { connection } from "../connection/connection";
-import Student from "../entity/Student";
+import { connection } from "../Connection/connection";
+import Student from "../Entity/Student";
 
 class Controller {
     constructor() { }
@@ -8,11 +8,11 @@ class Controller {
         connection
             .then(async connection => {
                 const students: Student[] = await connection.manager.find(Student);
-                res.json(students);
+                res.json({ error: null, data: students });
             })
             .catch(error => {
                 console.error("Error ", error);
-                res.json(error);
+                res.json({ error: error.message, data: null });
             });
     } public addStudent(req: Request, res: Response) {
         connection
@@ -26,11 +26,11 @@ class Controller {
                 student.hours = requestStudent.hours;
                 student.price = requestStudent.price;
                 await connection.manager.save(student);
-                res.json({ message: "Successfully Saved." })
+                res.json({ error: null, data: { message: "Successfully Saved." } })
             })
             .catch(error => {
                 console.error("Error ", error);
-                res.json(error);
+                res.json({ error: error.message, data: null });
             });
     } public updateStudent(req: Request, res: Response) {
         connection
@@ -44,11 +44,11 @@ class Controller {
                 student.hours = requestStudent.hours;
                 student.price = requestStudent.price;
                 await connection.manager.save(student);
-                res.json({ message: "Successfully Updated." })
+                res.json({ error: null, data: { message: "Successfully Updated." } })
             })
             .catch(error => {
                 console.error("Error ", error);
-                res.json(error);
+                res.json({ error: error.message, data: null });
             });
     } public getStudentById(req: Request, res: Response) {
         connection
@@ -58,18 +58,18 @@ class Controller {
             })
             .catch(error => {
                 console.error("Error ", error);
-                res.json(error);
+                res.json({ error: error.message, data: null });
             });
     } public deleteStudent(req: Request, res: Response) {
         connection
             .then(async connection => {
                 let student = await connection.manager.findOne(Student, req.params.studentId);
-                await connection.manager.remove(student); 
-                res.json({ message: "Successfully Removed." })
+                await connection.manager.remove(student);
+                res.json({ error: null, data: { message: "Successfully Removed." } })
             })
             .catch(error => {
                 console.error("Error ", error);
-                res.json(error);
+                res.json({ error: error.message, data: null });
             });
     }
 } export { Controller }

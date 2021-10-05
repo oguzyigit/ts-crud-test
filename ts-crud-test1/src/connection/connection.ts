@@ -1,15 +1,14 @@
 import { createConnection } from "typeorm";
-import Student from "../entity/Student";
+import Student from "../Entity/Student";
 export const connection = createConnection({
     type: "mysql",
     host: "localhost",
     port: 3306,
     username: "root",
     password: "",
-    database: "dbmali",
+    database: "test",
     entities: [
-        // typeORM will not be able to create database table if we forget to put entity class name here..
-        Student      // our Student entity class
+        Student     
     ],
     synchronize: true,
     logging: false
