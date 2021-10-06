@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Controller } from "../Controller/Controller";
+import { Controller } from "../controller/controller";
 
 class Routes {
     private controller: Controller; constructor() {
@@ -16,7 +16,7 @@ class Routes {
             });
         app.route('/api/student')
             .get(this.controller.getAllStudents)
-            .post(this.controller.addStudent); 
+            .post(this.controller.addStudent);
         app.route('/api/student/:studentId')
             .get(this.controller.getStudentById)
             .put(this.controller.updateStudent)

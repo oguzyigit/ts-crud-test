@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { connection } from "../Connection/connection";
-import Student from "../Entity/Student";
+import { connection } from "../connection/connection";
+import Student from "../entity/Student";
 
 class Controller {
     constructor() { }

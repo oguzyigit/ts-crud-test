@@ -1,5 +1,5 @@
 import * as express from 'express'
-import { Routes } from "./Routes/routes";
+import { Routes } from "./routes/routes";
 const bodyParser = require("body-parser");
 const {  handleCors, logStream } = require("./Utils/utils");
 const morgan = require("morgan");
